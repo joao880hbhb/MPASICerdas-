@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPASI Cerdas — Panduan Eksklusif, Bank Menu & Interactive Parenting Tools</title>
+    <meta name="description" content="Platform edukasi gizi anak & MPASI sehat 6-24 bulan oleh mahasiswa Poltekkes Kemenkes Bandung. Lengkap dengan bank menu, kalkulator tekstur, weekly planner, dan tracker makan.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#EC407A',
+                            darkpink: '#C2185B',
+                            purple: '#AB47BC',
+                            lavender: '#E9E2F3',
+                            palepink: '#FFF5F8',
+                            softcream: '#FFF9FB',
+                            darktext: '#373737',
+                            muted: '#85808A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        '3xl': '1.875rem',
+                        '4xl': '2.25rem',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFF9FB;
+            color: #373737;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF5F8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #EC407A;
+            border-radius: 4px;
+        }
+
+        /* Glassmorphism elements */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(233, 226, 243, 0.6);
+        }
+        
+        .glass-nav {
+            background: rgba(255, 249, 251, 0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(233, 226, 243, 0.7);
+        }
+
+        /* Subtle Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 5s ease-in-out infinite 1.5s;
+        }
+
+        /* 3D Book Styling */
+        .book-wrapper {
+            perspective: 1000px;
+        }
+        .book-cover {
+            transform: rotateY(-15deg) rotateX(5deg);
+            box-shadow: 15px 15px 30px rgba(194, 24, 91, 0.15), -2px 0 10px rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .book-wrapper:hover .book-cover {
+            transform: rotateY(-5deg) rotateX(2deg) scale(1.02);
+            box-shadow: 20px 20px 40px rgba(194, 24, 91, 0.25);
+        }
+
+        /* Custom Hide Scrollbar for Carousel */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-pink selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-pink to-brand-purple flex items-center justify-center text-white shadow-md shadow-brand-pink/20 group-hover:scale-105 transition-transform">
+                        <i data-lucide="utensils" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-brand-darkpink via-brand-pink to-brand-purple bg-clip-text text-transparent block leading-none">MPASI CERDAS</span>
+                        <span class="text-[10px] font-semibold text-brand-purple tracking-widest uppercase">Poltekkes Kemenkes Bandung</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden lg:flex items-center gap-7 font-medium text-sm text-brand-darktext">
+                    <a href="#about" class="hover:text-brand-pink transition-colors">Tentang Buku</a>
+                    <a href="#chapters" class="hover:text-brand-pink transition-colors">18 Bab</a>
+                    <a href="#bank-menu" class="hover:text-brand-pink transition-colors">Bank Menu</a>
+                    <a href="#interactive-apps" class="hover:text-brand-pink transition-colors flex items-center gap-1.5 text-brand-pink font-semibold bg-brand-palepink px-3 py-1.5 rounded-full border border-brand-pink/20">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Tools Interaktif
+                    </a>
+                    <a href="#texture-guide" class="hover:text-brand-pink transition-colors">Panduan Tekstur</a>
+                    <a href="#education" class="hover:text-brand-pink transition-colors">Edukasi Gizi</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="#consultation" class="bg-gradient-to-r from-brand-pink to-brand-darkpink text-white font-semibold text-sm px-6 py-3 rounded-full shadow-lg shadow-brand-pink/25 hover:shadow-xl hover:shadow-brand-pink/35 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                        <i data-lucide="message-circle-heart" class="w-4 h-4"></i>
+                        <span>Konsultasi Bidan</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="p-2.5 rounded-xl bg-brand-palepink text-brand-pink hover:bg-brand-lavender transition-colors" aria-label="Toggle menu">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-brand-lavender px-4 pt-3 pb-6 space-y-3 shadow-xl">
+            <a href="#about" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-brand-darktext hover:bg-brand-palepink hover:text-brand-pink transition-all">Tentang Buku</a>
+            <a href="#chapters" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-brand-darktext hover:bg-brand-palepink hover:text-brand-pink transition-all">18 Bab Panduan</a>
+            <a href="#bank-menu" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-brand-darktext hover:bg-brand-palepink hover:text-brand-pink transition-all">Bank Menu MPASI</a>
+            <a href="#interactive-apps" class="mobile-link block px-4 py-2.5 rounded-xl font-semibold text-brand-pink bg-brand-palepink border border-brand-pink/20">✨ Tools Interaktif Parenting</a>
+            <a href="#texture-guide" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-brand-darktext hover:bg-brand-palepink hover:text-brand-pink transition-all">Panduan Tekstur WHO</a>
+            <a href="#education" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-brand-darktext hover:bg-brand-palepink hover:text-brand-pink transition-all">Edukasi Stunting & Gizi</a>
+            <a href="#consultation" class="mobile-link block text-center bg-brand-pink text-white font-bold py-3 px-4 rounded-xl shadow-md mt-4">Konsultasi Bidan Sekarang</a>
+        </div>
+    </header>
+
+    <!-- SECTION 2 — HERO SECTION -->
+    <section id="hero" class="pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden relative">
+        <!-- Background Decorative Blobs -->
+        <div class="absolute top-10 left-10 w-96 h-96 bg-brand-pink/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-40 right-10 w-96 h-96 bg-brand-purple/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Content Column -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-palepink border border-brand-pink/20 text-brand-darkpink font-semibold text-xs sm:text-sm shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-pink animate-pulse"></span>
+                        <span>Smart Feeding for Little Ones — Poltekkes Kemenkes Bandung</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-darktext leading-tight tracking-tight">
+                        MPASI Cerdas <br class="hidden sm:inline">
+                        <span class="bg-gradient-to-r from-brand-pink via-brand-darkpink to-brand-purple bg-clip-text text-transparent">Tanpa Drama.</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-brand-muted max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Panduan lengkap ibu dalam memberikan MPASI sehat usia 6–24 bulan. Dilengkapi resep praktis, panduan tekstur standar WHO, edukasi pencegahan stunting, hingga tools planner interaktif.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#bank-menu" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-brand-pink to-brand-darkpink text-white font-bold text-base shadow-xl shadow-brand-pink/30 hover:shadow-2xl hover:shadow-brand-pink/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            <span>Jelajahi Bank Menu</span>
+                        </a>
+                        <a href="#interactive-apps" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white border-2 border-brand-lavender text-brand-purple font-bold text-base hover:bg-brand-palepink hover:border-brand-pink/40 transition-all flex items-center justify-center gap-2 shadow-sm">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-brand-pink"></i>
+                            <span>Fitur & Tools Interactive</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Highlights Badges -->
+                    <div class="pt-6 border-t border-brand-lavender/60 grid grid-cols-3 gap-4 text-center">
+                        <div class="p-3 rounded-2xl bg-white/60 border border-brand-lavender/50">
+                            <p class="font-bold text-xl text-brand-darkpink">100%</p>
+                            <p class="text-xs text-brand-muted">Panduan WHO & Kemenkes</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-white/60 border border-brand-lavender/50">
+                            <p class="font-bold text-xl text-brand-purple">18 Bab</p>
+                            <p class="text-xs text-brand-muted">Edukasi & Resep Lengkap</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-white/60 border border-brand-lavender/50">
+                            <p class="font-bold text-xl text-brand-pink">Bidan</p>
+                            <p class="text-xs text-brand-muted">Layanan Konsultasi Direct</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Column -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Main Hero Image Frame -->
+                        <div class="relative rounded-4xl overflow-hidden shadow-2xl border-4 border-white bg-white">
+                            <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="Bayi Makan MPASI Sehat" 
+                                 class="w-full h-[420px] object-cover hover:scale-105 transition-transform duration-700"
+                                 loading="lazy"
+                                 onerror="this.src='https://placehold.co/600x800/FFF5F8/EC407A?text=MPASI+Sehat'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                            
+                            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl glass-card text-white">
+                                <p class="text-xs font-medium text-pink-200">Rekomendasi Utama</p>
+                                <p class="text-sm font-bold text-brand-darktext">Nutrisi Seimbang & Tekstur Tepat Sejak Dini</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 1: Age Badge -->
+                        <div class="absolute -top-6 -left-6 glass-card p-4 rounded-3xl shadow-xl flex items-center gap-3 animate-float border border-white">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-palepink flex items-center justify-center text-brand-pink font-bold text-lg">
+                                6-24
+                            </div>
+                            <div>
+                                <p class="text-xs text-brand-muted font-medium">Fase Emas</p>
+                                <p class="text-sm font-bold text-brand-darktext">Bulan MPASI</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 2: Floating Recipe Card -->
+                        <div class="absolute -bottom-6 -right-6 glass-card p-4 rounded-3xl shadow-xl border border-white max-w-[220px] animate-float-delayed">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=200&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover" alt="Puree Alpukat" onerror="this.src='https://placehold.co/100x100/FFF5F8/EC407A?text=Menu'">
+                                <div>
+                                    <span class="text-[10px] bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">Kaya Prohe</span>
+                                    <p class="text-xs font-bold text-brand-darktext truncate mt-0.5">Bubur Ayam Wortel</p>
+                                    <p class="text-[10px] text-brand-muted">Tekstur Lumat (6-8bln)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3 — INTRODUCTION / ABOUT BOOK -->
+    <section id="about" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-brand-palepink via-white to-brand-lavender/40 rounded-4xl p-8 sm:p-12 lg:p-16 border border-brand-pink/15 shadow-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <!-- Left: CSS 3D E-Book Mockup -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="book-wrapper">
+                            <div class="book-cover w-64 sm:w-72 h-96 bg-gradient-to-b from-brand-pink via-brand-darkpink to-brand-purple rounded-2xl p-6 text-white flex flex-col justify-between border-r-8 border-pink-900/40 relative overflow-hidden">
+                                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-xl"></div>
+                                <div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-[10px] uppercase font-bold tracking-widest bg-white/20 px-3 py-1 rounded-full">E-BOOK GUIDE</span>
+                                        <i data-lucide="award" class="w-6 h-6 text-yellow-300"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-extrabold mt-8 leading-tight">MPASI CERDAS</h3>
+                                    <p class="text-xs text-pink-100 mt-2 font-light">Panduan Eksklusif MPASI Sehat, Bebas Stunting & Anti Drama</p>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-2 border-t border-white/20 pt-3">
+                                        <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">GN</div>
+                                        <div>
+                                            <p class="text-[11px] font-semibold leading-none">Ghaniya Nurinazma L.</p>
+                                            <p class="text-[9px] text-pink-200">Poltekkes Kemenkes Bandung</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: About Description -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-bold uppercase tracking-wider">
+                            <i data-lucide="book-open-check" class="w-4 h-4"></i> Buku Panduan Edukasi
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darktext leading-tight">
+                            Semua Panduan MPASI dalam Satu Buku Eksklusif
+                        </h2>
+                        <p class="text-brand-muted text-base leading-relaxed">
+                            Buku <span class="font-semibold text-brand-darkpink">MPASI Cerdas</span> dirancang khusus sebagai panduan praktis dan komprehensif bagi ibu muda. Menyajikan informasi ilmiah kesehatan anak secara populer, mudah dipahami, dan dapat langsung diterapkan di dapur rumah tangga.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-brand-lavender">
+                                <div class="p-2.5 rounded-xl bg-brand-palepink text-brand-pink shrink-0">
+                                    <i data-lucide="layers" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-brand-darktext">18 Bab Terstruktur</h4>
+                                    <p class="text-xs text-brand-muted mt-0.5">Mulai dari prinsip dasar MPASI hingga resep per tahapan usia.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-brand-lavender">
+                                <div class="p-2.5 rounded-xl bg-purple-50 text-brand-purple shrink-0">
+                                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-brand-darktext">Standar WHO & Kemenkes</h4>
+                                    <p class="text-xs text-brand-muted mt-0.5">Teruji secara medis untuk pencegahan stunting pada anak.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-wrap gap-4">
+                            <a href="#chapters" class="px-6 py-3 rounded-full bg-brand-darktext text-white font-semibold text-sm hover:bg-brand-pink transition-colors inline-flex items-center gap-2 shadow-md">
+                                <span>Jelajahi Isi 18 Bab</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4 — 18 CHAPTERS ACCORDION -->
+    <section id="chapters" class="py-20 bg-brand-softcream relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-xs font-bold tracking-widest text-brand-pink uppercase bg-brand-palepink px-4 py-1.5 rounded-full border border-brand-pink/20">Kurikulum Lengkap</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darktext">Belajar MPASI dari Dasar hingga Praktik</h2>
+                <p class="text-brand-muted text-sm sm:text-base">Temukan 18 bab edukasi terperinci yang dikelompokkan ke dalam 6 modul utama untuk mendampingi tumbuh kembang buah hati.</p>
+            </div>
+
+            <!-- Chapters Grid Container -->
+            <div id="chapters-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Chapters dynamic output JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5 — BANK MENU MPASI -->
+    <section id="bank-menu" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-bold tracking-widest text-brand-purple uppercase bg-purple-50 px-4 py-1.5 rounded-full border border-brand-purple/20">Inspirasi Dapur Sehat</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darktext mt-3">Temukan Menu MPASI Favorit Si Kecil</h2>
+                    <p class="text-brand-muted text-sm mt-1">Eksplorasi resep praktis, bergizi tinggi, dan ramah kantong.</p>
+                </div>
+
+                <!-- Filters & Search -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <div class="relative">
+                        <input type="text" id="recipe-search" placeholder="Cari resep (ayam, kentang...)" class="w-full sm:w-64 pl-10 pr-4 py-2.5 rounded-full bg-brand-softcream border border-brand-lavender text-xs sm:text-sm focus:outline-none focus:border-brand-pink">
+                        <i data-lucide="search" class="w-4 h-4 text-brand-muted absolute left-3.5 top-3"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar" id="age-filter-container">
+                <button data-age="all" class="filter-btn active px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-brand-pink text-white shadow-md shadow-brand-pink/20">Semua Usia</button>
+                <button data-age="6-8" class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-brand-palepink text-brand-darktext hover:bg-brand-lavender">6–8 Bulan (Lumat)</button>
+                <button data-age="9-11" class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-brand-palepink text-brand-darktext hover:bg-brand-lavender">9–11 Bulan (Cincang)</button>
+                <button data-age="12-24" class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-brand-palepink text-brand-darktext hover:bg-brand-lavender">12–24 Bulan (Keluarga)</button>
+            </div>
+
+            <!-- Recipe Grid -->
+            <div id="recipe-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6 — INTERACTIVE WEB APP TOOLS (PERSISTED IN LOCALSTORAGE) -->
+    <section id="interactive-apps" class="py-20 bg-gradient-to-b from-brand-palepink/60 via-white to-brand-softcream border-y border-brand-pink/10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-12">
+                <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-brand-pink text-white font-extrabold text-xs tracking-wider uppercase shadow-md shadow-brand-pink/20">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i> Interactive Parenting Tools
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darktext">Aplikasi Interaktif Pendamping Ibu</h2>
+                <p class="text-brand-muted text-sm sm:text-base">Gunakan kalkulator kebutuhan tekstur, perencana menu mingguan, serta jurnal pemantauan makan anak. Data tersimpan aman di browser Anda (LocalStorage).</p>
+            </div>
+
+            <!-- Interactive Tools Navigation Tabs -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1.5 rounded-2xl bg-brand-lavender/60 border border-brand-pink/20 gap-1 sm:gap-2 flex-wrap justify-center">
+                    <button id="tab-calc-btn" onclick="switchAppTab('calc')" class="app-tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all bg-white text-brand-darkpink shadow-sm">
+                        🧮 Kalkulator Tekstur & Schedule
+                    </button>
+                    <button id="tab-planner-btn" onclick="switchAppTab('planner')" class="app-tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-brand-muted hover:text-brand-darktext">
+                        📅 Weekly Menu Planner
+                    </button>
+                    <button id="tab-tracker-btn" onclick="switchAppTab('tracker')" class="app-tab-btn px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all text-brand-muted hover:text-brand-darktext">
+                        📓 Jurnal & Tracker Makan
+                    </button>
+                </div>
+            </div>
+
+            <!-- TOOL A: Kalkulator Tekstur & Jadwal Makan -->
+            <div id="app-tool-calc" class="app-tool-content block">
+                <div class="bg-white rounded-3xl p-6 sm:p-10 border border-brand-lavender shadow-xl max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                        <!-- Input Control -->
+                        <div class="md:col-span-5 space-y-5 border-b md:border-b-0 md:border-r border-brand-lavender pb-6 md:pb-0 md:pr-6">
+                            <h3 class="font-extrabold text-xl text-brand-darktext flex items-center gap-2">
+                                <i data-lucide="calculator" class="w-5 h-5 text-brand-pink"></i> Hitung Rekomendasi
+                            </h3>
+                            <div>
+                                <label class="block text-xs font-bold text-brand-muted uppercase mb-2">Usia Bayi Saat Ini (Bulan)</label>
+                                <div class="flex items-center gap-3">
+                                    <input type="number" id="calc-age-input" min="6" max="24" value="7" class="w-full px-4 py-3 rounded-xl border border-brand-lavender text-lg font-bold text-brand-darktext focus:outline-none focus:border-brand-pink">
+                                    <span class="font-bold text-sm text-brand-darktext">Bulan</span>
+                                </div>
+                                <p class="text-[11px] text-brand-muted mt-1.5">Masukkan usia antara 6 hingga 24 bulan.</p>
+                            </div>
+                            <button onclick="calculateMPASI()" class="w-full py-3.5 rounded-xl bg-brand-pink text-white font-bold text-sm shadow-md shadow-brand-pink/20 hover:bg-brand-darkpink transition-all flex items-center justify-center gap-2">
+                                <span>Tampilkan Rekomendasi</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+
+                        <!-- Result Display -->
+                        <div class="md:col-span-7 space-y-4" id="calc-result-box">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL B: Interactive Weekly Menu Planner -->
+            <div id="app-tool-planner" class="app-tool-content hidden">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-brand-lavender shadow-xl">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-brand-lavender">
+                        <div>
+                            <h3 class="font-extrabold text-xl text-brand-darktext flex items-center gap-2">
+                                <i data-lucide="calendar" class="w-5 h-5 text-brand-purple"></i> Perencana Menu Mingguan MPASI
+                            </h3>
+                            <p class="text-xs text-brand-muted mt-0.5">Atur jadwal makan pagi, siang, dan malam si kecil untuk 7 hari.</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="clearPlanner()" class="px-3.5 py-2 rounded-xl bg-rose-50 text-rose-600 font-bold text-xs hover:bg-rose-100 transition-colors">
+                                Reset Planner
+                            </button>
+                            <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-brand-palepink text-brand-pink font-bold text-xs hover:bg-brand-lavender transition-colors flex items-center gap-1.5">
+                                <i data-lucide="printer" class="w-4 h-4"></i> Cetak / Export PDF
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Planner Days Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4" id="planner-days-grid">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL C: Jurnal & Tracker Makan Si Kecil -->
+            <div id="app-tool-tracker" class="app-tool-content hidden">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border border-brand-lavender shadow-xl">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        <!-- Left: Form Input Tracker -->
+                        <div class="lg:col-span-5 space-y-4 border-b lg:border-b-0 lg:border-r border-brand-lavender pb-6 lg:pb-0 lg:pr-6">
+                            <h3 class="font-extrabold text-xl text-brand-darktext flex items-center gap-2">
+                                <i data-lucide="clipboard-pen" class="w-5 h-5 text-brand-pink"></i> Catat Log Makan
+                            </h3>
+                            <form id="tracker-form" onsubmit="saveTrackerEntry(event)" class="space-y-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-muted mb-1">Tanggal & Waktu Makan</label>
+                                    <input type="datetime-local" id="track-datetime" required class="w-full px-3.5 py-2.5 rounded-xl border border-brand-lavender text-xs font-semibold focus:outline-none focus:border-brand-pink">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-muted mb-1">Nama Menu / Makanan</label>
+                                    <input type="text" id="track-menu" placeholder="Contoh: Puree Alpukat Pisang" required class="w-full px-3.5 py-2.5 rounded-xl border border-brand-lavender text-xs focus:outline-none focus:border-brand-pink">
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-bold text-brand-muted mb-1">Tahap Tekstur</label>
+                                        <select id="track-texture" class="w-full px-3 py-2.5 rounded-xl border border-brand-lavender text-xs focus:outline-none focus:border-brand-pink">
+                                            <option value="Lumat / Saring">Lumat / Saring</option>
+                                            <option value="Cincang Halus">Cincang Halus</option>
+                                            <option value="Cincang Kasar">Cincang Kasar</option>
+                                            <option value="Finger Food">Finger Food</option>
+                                            <option value="Makanan Keluarga">Makanan Keluarga</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-brand-muted mb-1">Respon Bayi</label>
+                                        <select id="track-reaction" class="w-full px-3 py-2.5 rounded-xl border border-brand-lavender text-xs focus:outline-none focus:border-brand-pink">
+                                            <option value="Lahap (Sangat Suka)">😍 Lahap</option>
+                                            <option value="Suka">Blah Suka</option>
+                                            <option value="GTM (Tutup Mulut)">😾 GTM (Tutup Mulut)</option>
+                                            <option value="Alergi / Munta">⚠️ Reaksi Alergi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-muted mb-1">Catatan Tambahan</label>
+                                    <textarea id="track-notes" rows="2" placeholder="Porsi habis 3/4, tampak menikmati avocado..." class="w-full px-3.5 py-2.5 rounded-xl border border-brand-lavender text-xs focus:outline-none focus:border-brand-pink"></textarea>
+                                </div>
+                                <button type="submit" class="w-full py-3 rounded-xl bg-brand-purple text-white font-bold text-xs shadow-md hover:bg-purple-700 transition-all">
+                                    Simpan Log ke LocalStorage
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Right: Tracker History & Stats -->
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-extrabold text-lg text-brand-darktext">Riwayat Tracker Terakhir</h3>
+                                <button onclick="clearTrackerLogs()" class="text-[11px] font-bold text-rose-500 hover:underline">Hapus Semua History</button>
+                            </div>
+                            
+                            <!-- Logs Table/List -->
+                            <div class="max-h-80 overflow-y-auto space-y-3 border border-brand-lavender/60 p-2 rounded-2xl bg-brand-softcream" id="tracker-logs-container">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 7 — TEXTURE GUIDE (WHO STANDARDS) -->
+    <section id="texture-guide" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+                <span class="text-xs font-bold tracking-widest text-brand-darkpink uppercase bg-brand-palepink px-4 py-1.5 rounded-full border border-brand-pink/20">Tahapan Perkembangan</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darktext">Tekstur Berubah, Si Kecil Bertumbuh</h2>
+                <p class="text-brand-muted text-sm sm:text-base">Edukasi tahap tekstur MPASI berdasarkan standar WHO & Kemenkes RI untuk merangsang oromotor tanpa risiko tersedak.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 6-8 Bulan -->
+                <div class="rounded-3xl p-8 bg-gradient-to-b from-brand-palepink to-white border border-brand-pink/20 shadow-lg relative flex flex-col justify-between hover:border-brand-pink transition-all">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-pink text-white font-extrabold text-xl flex items-center justify-center shadow-md">
+                            6-8
+                        </div>
+                        <h3 class="text-xl font-extrabold text-brand-darktext">Usia 6–8 Bulan</h3>
+                        <p class="text-xs font-bold text-brand-pink uppercase tracking-wider">Tekstur Lumat / Puree / Saring</p>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                            Pengenalan makanan awal. Tekstur kental halus tanpa gumpalan kasar agar mudah ditelan oleh refleks lidah bayi.
+                        </p>
+                        <ul class="space-y-2 text-xs text-brand-darktext pt-2">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-pink"></i> Frekuensi: 2–3 kali makan utama + 1-2 selingan</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-pink"></i> Porsi: 2–3 sendok makan hingga ½ mangkuk 250ml</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 9-11 Bulan -->
+                <div class="rounded-3xl p-8 bg-gradient-to-b from-purple-50 to-white border border-brand-purple/20 shadow-lg relative flex flex-col justify-between hover:border-brand-purple transition-all">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-purple text-white font-extrabold text-xl flex items-center justify-center shadow-md">
+                            9-11
+                        </div>
+                        <h3 class="text-xl font-extrabold text-brand-darktext">Usia 9–11 Bulan</h3>
+                        <p class="text-xs font-bold text-brand-purple uppercase tracking-wider">Tekstur Cincang & Finger Food</p>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                            Latihan mengunyah dengan gigi/gusi. Makanan dicincang halus, cincang kasar, atau diberikan potongan lelembek (finger food).
+                        </p>
+                        <ul class="space-y-2 text-xs text-brand-darktext pt-2">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-purple"></i> Frekuensi: 3–4 kali makan utama + 1-2 selingan</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-purple"></i> Porsi: ½ hingga ¾ mangkuk ukuran 250ml</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 12-24 Bulan -->
+                <div class="rounded-3xl p-8 bg-gradient-to-b from-emerald-50 to-white border border-emerald-200 shadow-lg relative flex flex-col justify-between hover:border-emerald-400 transition-all">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500 text-white font-extrabold text-xl flex items-center justify-center shadow-md">
+                            12-24
+                        </div>
+                        <h3 class="text-xl font-extrabold text-brand-darktext">Usia 12–24 Bulan</h3>
+                        <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Makanan Meja / Keluarga</p>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                            Bayi sudah dapat mengonsumsi menu keluarga yang disesuaikan (dikurangi minyak berlebih, rasa tidak pedas, dan disajikan aman).
+                        </p>
+                        <ul class="space-y-2 text-xs text-brand-darktext pt-2">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Frekuensi: 3–4 kali makan + 2 kali selingan</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Porsi: ¾ hingga 1 mangkuk penuh 250ml</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8 — NUTRITION & STUNTING EDUCATION EDITORIAL -->
+    <section id="education" class="py-20 bg-brand-softcream relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-bold tracking-widest text-brand-purple uppercase bg-purple-100/60 px-4 py-1.5 rounded-full border border-brand-purple/20">Edukasi Kesehatan Anak</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darktext leading-tight">
+                        Bekali Mama dengan Pengetahuan Gizi Seimbang
+                    </h2>
+                    <p class="text-brand-muted text-sm sm:text-base leading-relaxed">
+                        Pencegahan stunting dan anemia dimulai dari piring MPASI harian. Kunci utamanya adalah kecukupan protein hewani (ayam, telur, ikan, daging) serta pemantauan kurva KMS secara berkala.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-2xl bg-white border border-brand-lavender flex items-start gap-4 shadow-sm">
+                            <div class="p-3 rounded-xl bg-rose-100 text-rose-600 shrink-0">
+                                <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-brand-darktext">Prioritas Protein Hewani (Prohe)</h4>
+                                <p class="text-xs text-brand-muted mt-1">Mengandung asam amino esensial lengkap yang sangat dibutuhkan untuk mencegah stunting pertumbuhan tinggi badan.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-white border border-brand-lavender flex items-start gap-4 shadow-sm">
+                            <div class="p-3 rounded-xl bg-purple-100 text-purple-600 shrink-0">
+                                <i data-lucide="activity" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-brand-darktext">Pantau Kurva KMS & Posyandu</h4>
+                                <p class="text-xs text-brand-muted mt-1">Pastikan berat dan tinggi badan anak naik sesuai pita hijau buku KIA setiap bulannya.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="rounded-3xl p-6 bg-white border border-brand-lavender shadow-md space-y-3">
+                            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-2xl" alt="Buah dan Sayur" onerror="this.src='https://placehold.co/400x300/FFF5F8/EC407A?text=Bahan+Gizi'">
+                            <h4 class="font-bold text-base text-brand-darktext">Pencegahan Anemia Defisiensi Besi</h4>
+                            <p class="text-xs text-brand-muted">Asupan zat besi dari hati ayam, daging merah, dan ikan sangat krusial untuk perkembangan otak bayi usia 6-12 bulan.</p>
+                        </div>
+                        <div class="rounded-3xl p-6 bg-white border border-brand-lavender shadow-md space-y-3">
+                            <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?q=80&w=400&auto=format&fit=crop" class="w-full h-40 object-cover rounded-2xl" alt="Lemak Tambahan" onerror="this.src='https://placehold.co/400x300/FFF5F8/EC407A?text=Lemak+Sehat'">
+                            <h4 class="font-bold text-base text-brand-darktext">Pentingnya Lemak Tambahan (LT)</h4>
+                            <p class="text-xs text-brand-muted">Minyak kelapa, santan, mentega, atau minyak zaitun membantu meningkatkan kepadatan kalori MPASI bagi bayi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9 — VIDEO TUTORIAL -->
+    <section id="videos" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+                <span class="text-xs font-bold tracking-widest text-brand-pink uppercase bg-brand-palepink px-4 py-1.5 rounded-full border border-brand-pink/20">Panduan Visual</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darktext">Belajar Memasak MPASI Praktis</h2>
+                <p class="text-brand-muted text-sm sm:text-base">Simak video tutorial teknik penyaringan, pengolahan prohe, dan variasi sajian sehat.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Video Card 1 -->
+                <div class="rounded-3xl bg-brand-softcream border border-brand-lavender overflow-hidden shadow-md group">
+                    <div class="relative aspect-video bg-slate-900 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" alt="Video Thumbnail" onerror="this.src='https://placehold.co/600x400/373737/FFFFFF?text=Demo+Video'">
+                        <button onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="absolute inset-0 m-auto w-14 h-14 rounded-full bg-brand-pink text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="w-6 h-6 fill-current ml-1"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold px-2.5 py-1 rounded-full">Tutorial MPASI 6-8 Bulan</span>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <h3 class="font-bold text-base text-brand-darktext">Cara Membuat Bubur Saring Ayam Wortel Tekstur Pas</h3>
+                        <p class="text-xs text-brand-muted">Teknik menyaring bubur tanpa menghilangkan nutrisi alami serat dan protein.</p>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div class="rounded-3xl bg-brand-softcream border border-brand-lavender overflow-hidden shadow-md group">
+                    <div class="relative aspect-video bg-slate-900 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" alt="Video Thumbnail" onerror="this.src='https://placehold.co/600x400/373737/FFFFFF?text=Demo+Video'">
+                        <button onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="absolute inset-0 m-auto w-14 h-14 rounded-full bg-brand-pink text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="w-6 h-6 fill-current ml-1"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold px-2.5 py-1 rounded-full">Tips & Trik</span>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <h3 class="font-bold text-base text-brand-darktext">Mengolah Hati Ayam Agar Tidak Amis & Disukai Bayi</h3>
+                        <p class="text-xs text-brand-muted">Rahasia mengolah sumber zat besi tinggi dengan rasa yang lezat.</p>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div class="rounded-3xl bg-brand-softcream border border-brand-lavender overflow-hidden shadow-md group">
+                    <div class="relative aspect-video bg-slate-900 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" alt="Video Thumbnail" onerror="this.src='https://placehold.co/600x400/373737/FFFFFF?text=Demo+Video'">
+                        <button onclick="playVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="absolute inset-0 m-auto w-14 h-14 rounded-full bg-brand-pink text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="w-6 h-6 fill-current ml-1"></i>
+                        </button>
+                        <span class="absolute top-3 left-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold px-2.5 py-1 rounded-full">Finger Food</span>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <h3 class="font-bold text-base text-brand-darktext">Penyajian Finger Food Aman untuk Bayi 9+ Bulan</h3>
+                        <p class="text-xs text-brand-muted">Potongan wortel & kentang kukus anti-tersedak (gagging vs choking).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10 — CONSULTATION WITH MIDWIFE -->
+    <section id="consultation" class="py-20 bg-gradient-to-br from-brand-palepink via-white to-brand-lavender/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-4xl p-8 sm:p-12 border border-brand-pink/20 shadow-2xl max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <!-- Form Left Info -->
+                    <div class="md:col-span-5 space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-palepink text-brand-pink flex items-center justify-center">
+                            <i data-lucide="stethoscope" class="w-6 h-6"></i>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-darktext">Masih Bingung Menentukan Menu Si Kecil?</h2>
+                        <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                            Tanyakan langsung kendala MPASI, indikasi GTM, naik tekstur, atau opsi alergi kepada Bidan.
+                        </p>
+                        <div class="pt-2 text-xs text-brand-purple font-semibold space-y-1">
+                            <p class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-pink"></i> Respon cepat via WhatsApp</p>
+                            <p class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-pink"></i> Layanan Edukasi Poltekkes Bandung</p>
+                        </div>
+                    </div>
+
+                    <!-- Consultation Form -->
+                    <div class="md:col-span-7">
+                        <form id="consultation-form" onsubmit="handleConsultationSubmit(event)" class="space-y-4 bg-brand-softcream p-6 rounded-3xl border border-brand-lavender">
+                            <div>
+                                <label class="block text-xs font-bold text-brand-darktext mb-1">Nama Ibu</label>
+                                <input type="text" id="consult-name" required placeholder="Contoh: Ibu Rina" class="w-full px-4 py-2.5 rounded-xl border border-brand-lavender text-xs focus:outline-none focus:border-brand-pink bg-white">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-darktext mb-1">Usia Anak (Bulan)</label>
+                                    <input type="number" id="consult-age" required min="5" max="36" placeholder="8" class="w-full px-4 py-2.5 rounded-xl border border-brand-lavender text-xs focus:outline-none focus:border-brand-pink bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-darktext mb-1">Topik Konsultasi</label>
+                                    <select id="consult-topic" class="w-full px-3 py-2.5 rounded-xl border border-brand-lavender text-xs focus:outline-none focus:border-brand-pink bg-white">
+                                        <option value="Gerakan Tutup Mulut (GTM)">GTM (Tutup Mulut)</option>
+                                        <option value="Tingkat Tekstur & Naikan Tekstur">Naik Tekstur</option>
+                                        <option value="Dugaan Alergi Makanan">Alergi Makanan</option>
+                                        <option value="Menu Gizi Seimbang">Variasi Menu</option>
+                                        <option value="Lainnya">Topik Lainnya</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-brand-darktext mb-1">Pesan / Pertanyaan Ibu</label>
+                                <textarea id="consult-message" rows="3" required placeholder="Halo Bidan, anak saya usia 8 bulan susah makan daging..." class="w-full px-4 py-2.5 rounded-xl border border-brand-lavender text-xs focus:outline-none focus:border-brand-pink bg-white"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="message-square" class="w-4 h-4"></i>
+                                <span>Kirim Konsultasi ke WhatsApp</span>
+                            </button>
+                            <p class="text-[10px] text-center text-brand-muted">Formulir ini tidak menyimpan data medis pribadi. Menghubungkan otomatis ke nomor WhatsApp resmi Bidan.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 11 — AUTHOR PROFILE -->
+    <section id="author" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-softcream rounded-4xl p-8 sm:p-12 border border-brand-lavender max-w-4xl mx-auto">
+                <div class="flex flex-col sm:flex-row items-center gap-8">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-white shadow-xl shrink-0" alt="Foto Penyusun" onerror="this.src='https://placehold.co/300x300/EC407A/FFFFFF?text=Ghaniya+N.'">
+                    
+                    <div class="space-y-3 text-center sm:text-left">
+                        <span class="text-xs font-bold text-brand-purple bg-purple-100 px-3 py-1 rounded-full uppercase tracking-wider">Penyusun Panduan</span>
+                        <h3 class="text-2xl font-extrabold text-brand-darktext">Ghaniya Nurinazma Lestari</h3>
+                        <p class="text-xs font-semibold text-brand-pink">Mahasiswa D-3 Kebidanan — Poltekkes Kemenkes Bandung</p>
+                        <p class="text-xs text-brand-muted leading-relaxed">
+                            Proyek kewirausahaan inovasi kesehatan edukasi MPASI anak yang didedikasikan untuk menurunkan angka stunting di Indonesia melalui pendampingan nutrisi ibu yang praktis dan terpercaya.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 12 — FAQ ACCORDION -->
+    <section id="faq" class="py-20 bg-brand-softcream relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="text-center space-y-3">
+                <span class="text-xs font-bold text-brand-pink uppercase bg-brand-palepink px-4 py-1.5 rounded-full border border-brand-pink/20">FAQ</span>
+                <h2 class="text-3xl font-extrabold text-brand-darktext">Pertanyaan Sering Diajukan</h2>
+            </div>
+
+            <div class="space-y-4" id="faq-accordion-container">
+                <!-- Dynamic FAQ Rendered -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 13 — FINAL CTA & FOOTER -->
+    <footer class="bg-brand-darktext text-white pt-16 pb-12 border-t border-brand-lavender/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- Brand Info -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-pink flex items-center justify-center text-white font-bold">
+                            <i data-lucide="utensils" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-extrabold text-xl tracking-tight text-white">MPASI CERDAS</span>
+                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed max-w-sm">
+                        Platform edukasi gizi anak dan buku panduan MPASI eksklusif untuk mendampingi masa emas pertumbuhan si kecil usia 6–24 bulan.
+                    </p>
+                </div>
+
+                <!-- Footer Nav Links -->
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="font-bold text-sm text-pink-300">Navigasi Utama</h4>
+                    <ul class="space-y-2 text-xs text-zinc-400">
+                        <li><a href="#about" class="hover:text-white transition-colors">Tentang E-Book</a></li>
+                        <li><a href="#bank-menu" class="hover:text-white transition-colors">Bank Menu MPASI</a></li>
+                        <li><a href="#interactive-apps" class="hover:text-white transition-colors">Interactive Parenting Tools</a></li>
+                        <li><a href="#texture-guide" class="hover:text-white transition-colors">Panduan Tekstur WHO</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Institution -->
+                <div class="md:col-span-4 space-y-3">
+                    <h4 class="font-bold text-sm text-pink-300">Inovasi Kesehatan Campus</h4>
+                    <p class="text-xs text-zinc-400">Poltekkes Kemenkes Bandung — Jurusan Kebidanan</p>
+                    <p class="text-xs text-zinc-400">WhatsApp Konsultasi: 0856-4998-3433</p>
+                </div>
+            </div>
+
+            <!-- Medical Disclaimer -->
+            <div class="pt-8 border-t border-zinc-800 text-[11px] text-zinc-400 leading-relaxed space-y-2">
+                <p class="font-bold text-zinc-300">Catatan & Disclaimer Medis:</p>
+                <p>
+                    MPASI Cerdas merupakan platform edukasi dan inovasi mahasiswa. Seluruh materi referensi disesuaikan dengan standar WHO dan Kemenkes RI. Informasi ini tidak menggantikan pemeriksaan langsung, diagnosis, atau saran medis dokter spesialis anak / bidan faskes Anda.
+                </p>
+            </div>
+
+            <div class="text-center text-xs text-zinc-400 pt-4 border-t border-zinc-800">
+                &copy; 2026 MPASI Cerdas — Poltekkes Kemenkes Bandung. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL POPUP DETIL RESEP -->
+    <div id="recipe-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl space-y-6">
+            <button onclick="closeRecipeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-brand-softcream text-brand-darktext flex items-center justify-center hover:bg-brand-palepink">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modal-recipe-content">
+                <!-- Dynamic Content JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP VIDEO PLAYER -->
+    <div id="video-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-black rounded-3xl max-w-3xl w-full aspect-video relative overflow-hidden shadow-2xl">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/40">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <iframe id="video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & PERSISTENCE -->
+    <script>
+        // DATA 18 CHAPTERS
+        const CHAPTERS_DATA = [
+            { id: 1, title: "1. Pengenalan Kebutuhan MPASI", cat: "Dasar MPASI", desc: "Kapan & mengapa bayi membutuhkan MPASI tepat usia 6 bulan." },
+            { id: 2, title: "2. Kesiapan Oromotor Bayi", cat: "Dasar MPASI", desc: "Tanda-tanda kesiapan fisik bayi mulai makan." },
+            { id: 3, title: "3. Prinsip Kebersihan & Sanitasi", cat: "Dasar MPASI", desc: "Mencuci bahan dan sterilisasi alat masak bayi." },
+            { id: 4, title: "4. Tahap Tekstur Usia 6-8 Bulan", cat: "Tekstur & Usia", desc: "Pembuatan saringan halus & lumat tanpa gumpalan." },
+            { id: 5, title: "5. Tahap Tekstur Usia 9-11 Bulan", cat: "Tekstur & Usia", desc: "Teknik cincang halus & eksplorasi finger food aman." },
+            { id: 6, title: "6. Makanan Keluarga Usia 12-24 Bulan", cat: "Tekstur & Usia", desc: "Menyesuaikan porsi & rasa meja makan keluarga." },
+            { id: 7, title: "7. Komposisi Gizi Seimbang", cat: "Gizi Seimbang", desc: "Perbandingan Karbo, Prohe, Prona, dan Lemak Sehat." },
+            { id: 8, title: "8. Peran Vital Protein Hewani (Prohe)", cat: "Gizi Seimbang", desc: "Daging, ayam, telur & ikan untuk pencegahan stunting." },
+            { id: 9, title: "9. Lemak Tambahan MPASI", cat: "Gizi Seimbang", desc: "Penggunaan santan, minyak kelapa, mentega untuk kalori." },
+            { id: 10, title: "10. Bahaya Stunting pada Tumbuh Kembang", cat: "Pencegahan Stunting", desc: "Memahami dampak jangka panjang stunting." },
+            { id: 11, title: "11. Strategi Asupan Tinggi Nutrisi", cat: "Pencegahan Stunting", desc: "Kombinasi makanan padat gizi harian anak." },
+            { id: 12, title: "12. Pencegahan Anemia Defisiensi Besi", cat: "Pencegahan Stunting", desc: "Pengolahan ati ayam dan daging merah kaya heme." },
+            { id: 13, title: "13. Membaca Grafik Pertumbuhan KMS", cat: "Pemantauan Pertumbuhan", desc: "Mengenali pita hijau & kenaikan berat badan minimal (KBM)." },
+            { id: 14, title: "14. Menghadapi Gerakan Tutup Mulut (GTM)", cat: "Pemantauan Pertumbuhan", desc: "Penyebab GTM & solusi mengatasinya tanpa paksaan." },
+            { id: 15, title: "15. Mengenali Reaksi Alergi Makanan", cat: "Pemantauan Pertumbuhan", desc: "Identifikasi ruam atau mual akibat bahan tertentu." },
+            { id: 16, title: "16. Resep Praktis Olahan Ayam & Daging", cat: "Resep & Praktik", desc: "Bubur tim dan puree gurih favorit si kecil." },
+            { id: 17, title: "17. Resep Olahan Ikan Lokal Tinggi Omega-3", cat: "Resep & Praktik", desc: "Memasak ikan kembung, lele, & gurame tanpa duri." },
+            { id: 18, title: "18. Variasi Camilan Sehat MPASI", cat: "Resep & Praktik", desc: "Puding buah alami & biskuit oat buatan rumah." }
+        ];
+
+        // DATA RECIPES BANK
+        const RECIPES_DATA = [
+            {
+                id: 'r1',
+                name: 'Bubur Ayam Wortel Lumat',
+                age: '6-8',
+                ageLabel: '6-8 Bulan',
+                texture: 'Lumat / Saring Halus',
+                img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&auto=format&fit=crop',
+                desc: 'Bubur halus dengan perpaduan karbohidrat beras, protein ayam suwir saring, dan wortel kaya vitamin A.',
+                ingredients: ['2 sdm Beras putih', '30g Daging ayam giling', '15g Wortel parut', '1 tsp Minyak kelapa / butter', '250ml Air / Kaldu ayam'],
+                steps: ['Rebus beras, ayam giling, dan wortel parut bersama kaldu hingga menjadi bubur lembek.', 'Haluskan dengan saringan kawat atau blender secukupnya.', 'Tambahkan minyak kelapa/butter hangat sebelum disajikan.'],
+                safetyNote: 'Pastikan tekstur licin tanpa gumpalan untuk bayi yang baru belajar mengunyah.'
+            },
+            {
+                id: 'r2',
+                name: 'Puree Alpukat Pisang Creamy',
+                age: '6-8',
+                ageLabel: '6-8 Bulan',
+                texture: 'Lumat Halus',
+                img: 'https://images.unsplash.com/photo-1528825871115-3581a5387919?q=80&w=600&auto=format&fit=crop',
+                desc: 'Camilan tinggi lemak baik dari alpukat mentega segar dicampur pisang manis alami.',
+                ingredients: ['½ buah Alpukat mentega matang', '½ buah Pisang ambon matang', '1-2 sdm ASI / Sufor hangat'],
+                steps: ['Keruk daging buah alpukat dan pisang.', 'Lumatkan menggunakan sendok garpu hingga tekstur sangat lembut.', 'Campurkan sedikit ASI/Sufor untuk menyesuaikan kekentalan.'],
+                safetyNote: 'Sajikan segera setelah dibuat agar warna buah tidak teroksidasi.'
+            },
+            {
+                id: 'r3',
+                name: 'Bubur Tim Kentang Ikan Kembung',
+                age: '9-11',
+                ageLabel: '9-11 Bulan',
+                texture: 'Cincang Halus',
+                img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&auto=format&fit=crop',
+                desc: 'Ikan kembung kaya Omega-3 dan zat besi dipadukan dengan kentang lumat gurih.',
+                ingredients: ['1 buah Kentang sedang (dikukus)', '30g Daging ikan kembung bebas duri', '1 sdm Santan cair hangat', 'Bawang putih cincang halus'],
+                steps: ['Kukus kentang dan ikan kembung hingga empuk.', 'Cincang halus daging ikan dan lumatkan kentang dengan garpu.', 'Tumis sebentar dengan sedikit santan cair dan bawang putih.'],
+                safetyNote: 'Periksa kembali duri ikan secara teliti sebelum dicincang.'
+            },
+            {
+                id: 'r4',
+                name: 'Nasi Tim Ayam Brokoli',
+                age: '9-11',
+                ageLabel: '9-11 Bulan',
+                texture: 'Cincang Kasar',
+                img: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?q=80&w=600&auto=format&fit=crop',
+                desc: 'Nasi lembek dengan potongan ayam cincang dan kuntum brokoli kukus.',
+                ingredients: ['3 sdm Nasi lembek', '30g Ayam cincang', '15g Brokoli cincang halus', '1 tsp Minyak zaitun'],
+                steps: ['Kukus nasi lembek, ayam, dan brokoli dalam wadah tim hingga empuk.', 'Aduk rata dan tambahkan minyak zaitun sebelum disajikan.'],
+                safetyNote: 'Ukuran cincangan disesuaikan dengan kemampuan mengunyah anak.'
+            },
+            {
+                id: 'r5',
+                name: 'Sup Telur Tahu Makanan Keluarga',
+                age: '12-24',
+                ageLabel: '12-24 Bulan',
+                texture: 'Potongan Lembut',
+                img: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=600&auto=format&fit=crop',
+                desc: 'Sup hangat bergizi berisi kocokan telur, potongan tahu sutra, dan daun bawang.',
+                ingredients: ['1 butir Telur ayam', '30g Tahu sutra potong dadu', '1 batang Daun bawang', 'Kaldu sapi alami secukupnya'],
+                steps: ['Didihkan kaldu sapi alami.', 'Masukkan potongan tahu sutra.', 'Tuang kocokan telur perlahan sambil diaduk membentuk serabut.'],
+                safetyNote: 'Pastikan suhu sup hangat suam-suam kuku sebelum disuapkan.'
+            },
+            {
+                id: 'r6',
+                name: 'Nasi Lembek Daging Sapi Cincang',
+                age: '12-24',
+                ageLabel: '12-24 Bulan',
+                texture: 'Nasi Lembut / Meja',
+                img: 'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?q=80&w=600&auto=format&fit=crop',
+                desc: 'Sajian tinggi zat besi dari daging sapi cincang olahan mentega gurih.',
+                ingredients: ['3 sdm Nasi lembut', '30g Daging sapi giling', '10g Wortel potong kecil', '1 tsp Mentega (Unsalted Butter)'],
+                steps: ['Tumis daging sapi giling dengan mentega hingga matang dan harum.', 'Masukkan wortel kecil dan tambahkan sedikit air.', 'Sajikan bersama nasi lembut hangat.'],
+                safetyNote: 'Pastikan daging sapi giling benar-benar empuk.'
+            }
+        ];
+
+        // FAQ DATA
+        const FAQ_DATA = [
+            { q: "Apa itu platform MPASI Cerdas?", a: "MPASI Cerdas adalah platform digital & buku panduan edukasi gizi anak karya mahasiswa Poltekkes Kemenkes Bandung untuk membantu orang tua menyajikan MPASI bernutrisi 6-24 bulan." },
+            { q: "Kapan waktu paling tepat memulai MPASI?", a: "Tepat pada usia bayi 6 bulan (180 hari). Memulai MPASI terlalu dini (<6 bulan) atau terlambat (>6 bulan) memiliki risiko gangguan kesehatan." },
+            { q: "Bagaimana jika bayi mengalami GTM (Gerakan Tutup Mulut)?", a: "GTM adalah hal wajar. Periksa apakah bayi sedang tumbuh gigi, kenyang susu, atau bosan dengan tekstur/rasa. Terapkan feeding rules 30 menit tanpa paksaan." },
+            { q: "Apakah platform ini menggantikan konsultasi ke dokter?", a: "Tidak. MPASI Cerdas berfungsi sebagai media edukasi. Untuk kondisi medis khusus (stunting berat, alergi kronis), tetap konsultasikan ke dokter spesialis anak." }
+        ];
+
+        // INITIALIZATION & STATE
+        let savedBookmarks = JSON.parse(localStorage.getItem('mpasi_bookmarks')) || [];
+        let plannerState = JSON.parse(localStorage.getItem('mpasi_planner')) || {
+            Senin: { breakfast: '', lunch: '', dinner: '' },
+            Selasa: { breakfast: '', lunch: '', dinner: '' },
+            Rabu: { breakfast: '', lunch: '', dinner: '' },
+            Kamis: { breakfast: '', lunch: '', dinner: '' },
+            Jumat: { breakfast: '', lunch: '', dinner: '' },
+            Sabtu: { breakfast: '', lunch: '', dinner: '' },
+            Minggu: { breakfast: '', lunch: '', dinner: '' }
+        };
+        let trackerLogs = JSON.parse(localStorage.getItem('mpasi_tracker')) || [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initMobileNav();
+            renderChapters();
+            renderRecipes('all');
+            setupSearchAndFilter();
+            renderPlanner();
+            renderTrackerLogs();
+            renderFAQ();
+            calculateMPASI(); // Initial calculator run
+        });
+
+        // NAVBAR MOBILE TOGGLE
+        function initMobileNav() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => menu.classList.add('hidden'));
+            });
+        }
+
+        // RENDER 18 CHAPTERS
+        function renderChapters() {
+            const container = document.getElementById('chapters-grid');
+            container.innerHTML = CHAPTERS_DATA.map(ch => `
+                <div class="bg-white rounded-3xl p-6 border border-brand-lavender/70 shadow-sm hover:shadow-md hover:border-brand-pink/30 transition-all space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-brand-palepink text-brand-darkpink border border-brand-pink/10">${ch.cat}</span>
+                        <span class="text-xs font-bold text-brand-purple">Bab #${ch.id}</span>
+                    </div>
+                    <h3 class="font-extrabold text-base text-brand-darktext">${ch.title}</h3>
+                    <p class="text-xs text-brand-muted leading-relaxed">${ch.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // RENDER RECIPES GRID
+        function renderRecipes(filterAge = 'all', searchQuery = '') {
+            const container = document.getElementById('recipe-grid');
+            let filtered = RECIPES_DATA;
+
+            if (filterAge !== 'all') {
+                filtered = filtered.filter(r => r.age === filterAge);
+            }
+            if (searchQuery.trim() !== '') {
+                filtered = filtered.filter(r => 
+                    r.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                    r.desc.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            }
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-brand-muted text-sm font-medium">Tidak ada resep yang sesuai pencarian.</div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(r => {
+                const isBookmarked = savedBookmarks.includes(r.id);
+                return `
+                <div class="bg-white rounded-3xl overflow-hidden border border-brand-lavender shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-brand-palepink">
+                            <img src="${r.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="${r.name}" onerror="this.src='https://placehold.co/600x400/FFF5F8/EC407A?text=Resep+MPASI'">
+                            <span class="absolute top-3 left-3 text-[10px] font-bold bg-white/90 backdrop-blur text-brand-darkpink px-3 py-1 rounded-full shadow-sm">${r.ageLabel}</span>
+                            <button onclick="toggleBookmark('${r.id}')" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-brand-pink shadow-md hover:scale-110 transition-transform">
+                                <i data-lucide="bookmark" class="w-4 h-4 ${isBookmarked ? 'fill-current' : ''}"></i>
+                            </button>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <span class="text-[10px] font-semibold text-brand-purple uppercase tracking-wider">${r.texture}</span>
+                            <h3 class="font-extrabold text-base text-brand-darktext group-hover:text-brand-pink transition-colors">${r.name}</h3>
+                            <p class="text-xs text-brand-muted line-clamp-2 leading-relaxed">${r.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="openRecipeModal('${r.id}')" class="w-full py-2.5 rounded-full bg-brand-palepink text-brand-darkpink font-bold text-xs hover:bg-brand-pink hover:text-white transition-all flex items-center justify-center gap-1.5">
+                            <span>Lihat Resep Detil</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            `}).join('');
+            lucide.createIcons();
+        }
+
+        // SEARCH & FILTER SETUP
+        function setupSearchAndFilter() {
+            const ageBtns = document.querySelectorAll('.filter-btn');
+            let currentAge = 'all';
+
+            ageBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    ageBtns.forEach(b => {
+                        b.classList.remove('bg-brand-pink', 'text-white', 'shadow-md');
+                        b.classList.add('bg-brand-palepink', 'text-brand-darktext');
+                    });
+                    e.target.classList.remove('bg-brand-palepink', 'text-brand-darktext');
+                    e.target.classList.add('bg-brand-pink', 'text-white', 'shadow-md');
+                    currentAge = e.target.getAttribute('data-age');
+                    renderRecipes(currentAge, document.getElementById('recipe-search').value);
+                });
+            });
+
+            document.getElementById('recipe-search').addEventListener('input', (e) => {
+                renderRecipes(currentAge, e.target.value);
+            });
+        }
+
+        // BOOKMARK LOCALSTORAGE
+        function toggleBookmark(id) {
+            if(savedBookmarks.includes(id)) {
+                savedBookmarks = savedBookmarks.filter(bId => bId !== id);
+            } else {
+                savedBookmarks.push(id);
+            }
+            localStorage.setItem('mpasi_bookmarks', JSON.stringify(savedBookmarks));
+            const currentAge = document.querySelector('.filter-btn.bg-brand-pink')?.getAttribute('data-age') || 'all';
+            renderRecipes(currentAge, document.getElementById('recipe-search').value);
+        }
+
+        // MODAL RECIPE
+        function openRecipeModal(id) {
+            const r = RECIPES_DATA.find(item => item.id === id);
+            if(!r) return;
+            const content = document.getElementById('modal-recipe-content');
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <img src="${r.img}" class="w-full h-52 object-cover rounded-2xl" alt="${r.name}">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-palepink text-brand-pink">${r.ageLabel}</span>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-purple-50 text-brand-purple">${r.texture}</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-brand-darktext">${r.name}</h2>
+                    <p class="text-xs text-brand-muted leading-relaxed">${r.desc}</p>
+                    
+                    <div class="space-y-2 pt-2">
+                        <h4 class="font-bold text-sm text-brand-darktext">Bahan-Bahan:</h4>
+                        <ul class="list-disc list-inside text-xs text-brand-muted space-y-1">
+                            ${r.ingredients.map(i => `<li>${i}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <h4 class="font-bold text-sm text-brand-darktext">Langkah Pembuatan:</h4>
+                        <ol class="list-decimal list-inside text-xs text-brand-muted space-y-1">
+                            ${r.steps.map(s => `<li>${s}</li>`).join('')}
+                        </ol>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs space-y-1">
+                        <p class="font-bold">⚠️ Catatan Keamanan Makan:</p>
+                        <p>${r.safetyNote}</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('recipe-modal').classList.remove('hidden');
+        }
+
+        function closeRecipeModal() {
+            document.getElementById('recipe-modal').classList.add('hidden');
+        }
+
+        // VIDEO MODAL
+        function playVideoModal(url) {
+            document.getElementById('video-iframe').src = url;
+            document.getElementById('video-modal').classList.remove('hidden');
+        }
+        function closeVideoModal() {
+            document.getElementById('video-iframe').src = '';
+            document.getElementById('video-modal').classList.add('hidden');
+        }
+
+        // INTERACTIVE TOOLS TAB SWITCHING
+        function switchAppTab(tabName) {
+            document.querySelectorAll('.app-tab-btn').forEach(b => {
+                b.classList.remove('bg-white', 'text-brand-darkpink', 'shadow-sm');
+                b.classList.add('text-brand-muted');
+            });
+            document.querySelectorAll('.app-tool-content').forEach(c => c.classList.add('hidden'));
+
+            if(tabName === 'calc') {
+                document.getElementById('tab-calc-btn').classList.add('bg-white', 'text-brand-darkpink', 'shadow-sm');
+                document.getElementById('app-tool-calc').classList.remove('hidden');
+            } else if(tabName === 'planner') {
+                document.getElementById('tab-planner-btn').classList.add('bg-white', 'text-brand-darkpink', 'shadow-sm');
+                document.getElementById('app-tool-planner').classList.remove('hidden');
+            } else if(tabName === 'tracker') {
+                document.getElementById('tab-tracker-btn').classList.add('bg-white', 'text-brand-darkpink', 'shadow-sm');
+                document.getElementById('app-tool-tracker').classList.remove('hidden');
+            }
+        }
+
+        // TOOL A: KALKULATOR MPASI
+        function calculateMPASI() {
+            const age = parseInt(document.getElementById('calc-age-input').value) || 6;
+            const resBox = document.getElementById('calc-result-box');
+
+            let texture = '';
+            let freq = '';
+            let portion = '';
+            let tips = '';
+
+            if (age < 6) {
+                texture = 'ASI Eksklusif';
+                freq = 'Sesuai Keinginan Bayi (On Demand)';
+                portion = '100% ASI';
+                tips = 'Bayi di bawah 6 bulan disarankan ASI Eksklusif kecuali atas petunjuk medis dokter.';
+            } else if (age >= 6 && age <= 8) {
+                texture = 'Lumat / Saring Halus (Puree / Smooth Porridge)';
+                freq = '2–3x Makan Utama + 1–2x Selingan';
+                portion = '2–3 sendok makan bertahap hingga ½ mangkuk (125ml)';
+                tips = 'Utamakan Protein Hewani (Ayam/Telur/Daging) dan Lemak Tambahan. Tekstur licin tanpa gumpalan.';
+            } else if (age >= 9 && age <= 11) {
+                texture = 'Cincang Halus / Cincang Kasar / Finger Food';
+                freq = '3–4x Makan Utama + 1–2x Selingan';
+                portion = '½ hingga ¾ mangkuk ukuran 250ml (125-180ml)';
+                tips = 'Bayi belajar mengunyah. Berikan makanan cincang dan potongan lelembek yang bisa dipegang sendiri.';
+            } else {
+                texture = 'Makanan Meja / Menu Keluarga Disesuaikan';
+                freq = '3–4x Makan Utama + 2x Selingan';
+                portion = '¾ hingga 1 mangkuk penuh 250ml';
+                tips = 'Makanan keluarga dengan rasa lembut (kurangi garam/gula & minyak berlebih). Hindari makanan keras/risiko tersedak.';
+            }
+
+            resBox.innerHTML = `
+                <div class="space-y-4">
+                    <div class="p-4 rounded-2xl bg-brand-palepink border border-brand-pink/20">
+                        <span class="text-[10px] font-bold text-brand-pink uppercase tracking-widest">Rekomendasi Standar WHO</span>
+                        <h4 class="font-extrabold text-lg text-brand-darktext mt-1">${texture}</h4>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <div class="p-3.5 rounded-xl bg-brand-softcream border border-brand-lavender">
+                            <span class="font-bold text-brand-purple block">Frekuensi Makan:</span>
+                            <p class="text-brand-darktext mt-0.5 font-medium">${freq}</p>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-brand-softcream border border-brand-lavender">
+                            <span class="font-bold text-brand-purple block">Porsi Sekali Makan:</span>
+                            <p class="text-brand-darktext mt-0.5 font-medium">${portion}</p>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 text-xs text-brand-darktext space-y-1">
+                        <p class="font-bold text-brand-purple">💡 Tips Nutrisi & Penyajian Usia ${age} Bulan:</p>
+                        <p class="text-brand-muted leading-relaxed">${tips}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // TOOL B: WEEKLY PLANNER LOGIC & LOCALSTORAGE
+        function renderPlanner() {
+            const grid = document.getElementById('planner-days-grid');
+            const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+
+            grid.innerHTML = days.map(day => `
+                <div class="bg-brand-softcream rounded-2xl p-3.5 border border-brand-lavender space-y-3">
+                    <span class="font-extrabold text-xs text-brand-darkpink uppercase tracking-wider block text-center border-b border-brand-lavender pb-2">${day}</span>
+                    
+                    <div class="space-y-2">
+                        <div>
+                            <span class="text-[9px] font-bold text-brand-muted uppercase">Pagi</span>
+                            <input type="text" value="${plannerState[day]?.breakfast || ''}" 
+                                   onchange="updatePlanner('${day}', 'breakfast', this.value)" 
+                                   placeholder="Menu pagi..." 
+                                   class="w-full text-[11px] p-2 rounded-lg border border-brand-lavender bg-white focus:outline-none focus:border-brand-pink">
+                        </div>
+                        <div>
+                            <span class="text-[9px] font-bold text-brand-muted uppercase">Siang</span>
+                            <input type="text" value="${plannerState[day]?.lunch || ''}" 
+                                   onchange="updatePlanner('${day}', 'lunch', this.value)" 
+                                   placeholder="Menu siang..." 
+                                   class="w-full text-[11px] p-2 rounded-lg border border-brand-lavender bg-white focus:outline-none focus:border-brand-pink">
+                        </div>
+                        <div>
+                            <span class="text-[9px] font-bold text-brand-muted uppercase">Malam</span>
+                            <input type="text" value="${plannerState[day]?.dinner || ''}" 
+                                   onchange="updatePlanner('${day}', 'dinner', this.value)" 
+                                   placeholder="Menu malam..." 
+                                   class="w-full text-[11px] p-2 rounded-lg border border-brand-lavender bg-white focus:outline-none focus:border-brand-pink">
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updatePlanner(day, meal, val) {
+            if(!plannerState[day]) plannerState[day] = {};
+            plannerState[day][meal] = val;
+            localStorage.setItem('mpasi_planner', JSON.stringify(plannerState));
+        }
+
+        function clearPlanner() {
+            plannerState = {
+                Senin: { breakfast: '', lunch: '', dinner: '' },
+                Selasa: { breakfast: '', lunch: '', dinner: '' },
+                Rabu: { breakfast: '', lunch: '', dinner: '' },
+                Kamis: { breakfast: '', lunch: '', dinner: '' },
+                Jumat: { breakfast: '', lunch: '', dinner: '' },
+                Sabtu: { breakfast: '', lunch: '', dinner: '' },
+                Minggu: { breakfast: '', lunch: '', dinner: '' }
+            };
+            localStorage.setItem('mpasi_planner', JSON.stringify(plannerState));
+            renderPlanner();
+        }
+
+        // TOOL C: FEEDING TRACKER & LOCALSTORAGE
+        function saveTrackerEntry(e) {
+            e.preventDefault();
+            const datetime = document.getElementById('track-datetime').value;
+            const menu = document.getElementById('track-menu').value;
+            const texture = document.getElementById('track-texture').value;
+            const reaction = document.getElementById('track-reaction').value;
+            const notes = document.getElementById('track-notes').value;
+
+            const newLog = { id: Date.now(), datetime, menu, texture, reaction, notes };
+            trackerLogs.unshift(newLog);
+            localStorage.setItem('mpasi_tracker', JSON.stringify(trackerLogs));
+
+            document.getElementById('tracker-form').reset();
+            renderTrackerLogs();
+        }
+
+        function renderTrackerLogs() {
+            const container = document.getElementById('tracker-logs-container');
+            if(trackerLogs.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-xs text-brand-muted">Belum ada catat log makan. Silakan tambahkan melalui form di samping.</div>`;
+                return;
+            }
+
+            container.innerHTML = trackerLogs.map(log => `
+                <div class="p-3.5 bg-white rounded-xl border border-brand-lavender text-xs space-y-1">
+                    <div class="flex items-center justify-between font-bold text-brand-darktext">
+                        <span>${log.menu}</span>
+                        <span class="text-[10px] text-brand-pink font-semibold">${log.datetime ? new Date(log.datetime).toLocaleString('id-ID') : ''}</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-[11px]">
+                        <span class="px-2 py-0.5 rounded-full bg-brand-palepink text-brand-darkpink">${log.texture}</span>
+                        <span class="px-2 py-0.5 rounded-full bg-purple-50 text-brand-purple font-semibold">${log.reaction}</span>
+                    </div>
+                    ${log.notes ? `<p class="text-[11px] text-brand-muted italic mt-1">${log.notes}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function clearTrackerLogs() {
+            trackerLogs = [];
+            localStorage.setItem('mpasi_tracker', JSON.stringify(trackerLogs));
+            renderTrackerLogs();
+        }
+
+        // SECTION 9: CONSULTATION WHATSAPP GENERATOR
+        function handleConsultationSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('consult-name').value;
+            const age = document.getElementById('consult-age').value;
+            const topic = document.getElementById('consult-topic').value;
+            const msg = document.getElementById('consult-message').value;
+
+            const text = `Halo Bidan, saya ingin konsultasi MPASI.%0A%0A*Nama Ibu:* ${name}%0A*Usia Anak:* ${age} bulan%0A*Topik:* ${topic}%0A*Pesan:* ${msg}%0A%0AMohon informasi lebih lanjut. Terima kasih!`;
+            
+            window.open(`https://wa.me/6285649983433?text=${text}`, '_blank');
+        }
+
+        // RENDER FAQ ACCORDION
+        function renderFAQ() {
+            const container = document.getElementById('faq-accordion-container');
+            container.innerHTML = FAQ_DATA.map((item, idx) => `
+                <div class="bg-white rounded-2xl border border-brand-lavender overflow-hidden shadow-sm">
+                    <button onclick="toggleFAQ(${idx})" class="w-full p-5 text-left font-extrabold text-sm text-brand-darktext flex justify-between items-center hover:text-brand-pink transition-colors">
+                        <span>${item.q}</span>
+                        <i data-lucide="chevron-down" id="faq-icon-${idx}" class="w-5 h-5 text-brand-pink transition-transform"></i>
+                    </button>
+                    <div id="faq-ans-${idx}" class="hidden p-5 pt-0 text-xs text-brand-muted leading-relaxed border-t border-brand-lavender/40">
+                        ${item.a}
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function toggleFAQ(idx) {
+            const ans = document.getElementById(`faq-ans-${idx}`);
+            const icon = document.getElementById(`faq-icon-${idx}`);
+            ans.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+    </script>
+</body>
+</html>
